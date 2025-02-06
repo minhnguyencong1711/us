@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(45deg, #3a3a3a, #6b5b95);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            width: 60%;
+            height: 70vh;
+            margin: 10vh auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #999;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+            overflow-y: auto;
+            color: #333;
+        }
+
+        .tear {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(150, 200, 255, 0.6);
+            border-radius: 50%;
+            animation: fall 2s infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div id="tearsContainer"></div>
+    
+    <div class="card">
+        <h1>Những điều chưa nói...</h1>
+        <p>Có lẽ chúng ta đã không còn hiểu nhau như ngày đầu...</p>
+        <!-- Thêm nội dung dài ở đây -->
+    </div>
+
+    <script>
+        // Tạo giọt nước mắt
+        for (let i = 0; i < 30; i++) {
+            const tear = document.createElement('div');
+            tear.className = 'tear';
+            tear.style.left = Math.random() * 100 + 'vw';
+            tear.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('tearsContainer').appendChild(tear);
+        }
+    </script>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="page3.html" style="text-decoration: none;">
+            <button style="padding: 10px 20px; font-size: 16px; background-color: #ff3366; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                NEXT
+            </button>
+        </a>
+    </div>
+</body>
+</html>
