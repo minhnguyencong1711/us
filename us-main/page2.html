@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(45deg, #3a3a3a, #6b5b95);
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            width: 50%;
+            min-height: 70vh;
+            margin: 10vh auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #999;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+            color: #333;
+        }
+
+        .tear {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: rgba(150, 200, 255, 0.6);
+            border-radius: 50%;
+            animation: fall 2s infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="icon" href="../images/pinie.jpg" />
+    <title>To my love ❤️</title>
+</head>
+<body>
+    <div id="tearsContainer"></div>
+    
+    <div class="card">
+        <h1>Lời tạm biệt của chúng ta...</h1>
+        <p>Mi biết, từ đầu bạn gái của mi đã xác định con đường phía trước của mình, đó là đi đến một môi trường mới, khám</p>
+        <p>phá những điều mới, thoát ra khỏi một nơi quen thuộc để trau dồi bản thân bằng những thử thách mới. Mi rất</p>
+        <p>ngưỡng mộ u vì điều này, u dám đương đầu với thử thách mới. Mặc dù u nói rằng u lo lắng, u sợ, mi nghĩ ai</p>
+        <p>cũng vậy, vì nơi u đến rất tốt, ở tầm vóc thế giới, áp lực của u là rất lớn. Nhưng u ơi, bạn gái mi rất giỏi, rất</p>
+        <p>chịu khó, u đã vượt qua rất nhiều khó khăn, vượt qua rất nhiều cá nhân xuất sắc khác, để đạt được thành tựu như</p>
+        <p>ngày hôm nay. Mọi thứ u cố gắng, hôm nay dẫn u đến một khởi đầu mới, của một chặng đường rất quan trọng</p>
+        <p>trong cuộc đời của Bảo Dung. U sẽ còn đương đầu với nhiều thử thách hơn nữa. Nhưng mi tin là u sẽ vượt qua</p>
+        <p>tất cả, một cách xuất sắc.</p>
+        <p>Lời tạm biệt này, không phải vì xa nhau. Mà đây là lời tạm biệt chính thức của chúng ta, tạm biệt 18 năm đầu tiên</p>
+        <p>của cuộc đời, những ký ức đẹp đẽ đó sẽ luôn trong tâm trí của 2 ta. Từ nay cả 2 chúng ta đều sẽ bước sang trang</p>
+        <p>mới rồi, hãy cùng nhau bước tiếp nhé. Mặc dù 2 người ở 2 nơi, hãy luôn dõi theo bước chân của đối phương, xem</p>
+        <p>đó là động lực để bản thân cố gắng hơn nhé. Mi rất yêu u, yêu quãng thời gian bên nhau, chặng đường sắp tới sẽ có</p>
+        <p>nhiều thử thách đợi chờ chúng ta, mong chúng ta của sau này vẫn có chúng ta.</p>
+        <p>Mi mong vào lần trở về tiếp theo của u, chúng ta vẫn sẽ bên cạnh nhau, vẫn sẽ đi cùng nhau, làm mọi thứ</p>
+        <p>cùng nhau.</p>
+        <p>Xa nhau cũng sẽ giúp cả 2 chúng ta trân trọng những khoảnh khắc ở bên nhau hơn, hãy tiếp tục bước tiếp, vì bản</p>
+        <p>thân, vì chúng ta của tương lai. Mi mong sẽ là Happy Ending.</p>
+        <p style="padding-left: 350px;">Mi thít u rất nhiềuuuu!!!</p>
+
+    </div>
+    
+
+    <div style="text-align: center; margin-top: 20px; padding-bottom: 50px;">
+        <a href="page3.html" style="text-decoration: none;">
+            <button style="padding: 10px 20px; font-size: 16px; background-color: #6b5b95; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                NEXT
+            </button>
+        </a>
+    </div>
+
+    <script>
+        for (let i = 0; i < 30; i++) {
+            const tear = document.createElement('div');
+            tear.className = 'tear';
+            tear.style.left = Math.random() * 100 + 'vw';
+            tear.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('tearsContainer').appendChild(tear);
+        }
+    </script>
+</body>
+</html>

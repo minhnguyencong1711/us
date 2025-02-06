@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient( #ff99cc, #ff1a66);
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .deco-left, .deco-right {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 200px;
+        }
+
+        .deco-left { left: 0; }
+        .deco-right { right: 0; }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ff3366;
+            animation: float 3s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100vh); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            width: 50%;
+            min-height: 70vh;
+            margin: 5vh auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="icon" href="../images/pinie.jpg" />
+    <title>To my love ❤️</title>
+</head>
+<body>
+    <div class="deco-left" id="leftDeco"></div>
+    <div class="deco-right" id="rightDeco"></div>
+    
+    <div class="card">
+        <h1>Gửi bạn gái Bảo Dung của mi với nhiều yêu thương, ❤️</h1>
+        <p>Có lẽ đã hơi muộn so với 31/1, ngày anni nửa năm của tụi mình. 6 tháng có lẽ không quá dài, cũng không quá</p>
+        <p>ngắn, nhưng mi nghĩ là đã đủ để chúng ta hiểu nhau hơn, ở bên nhau với cương vị khác, sau quãng thời gian tìm</p>
+        <p>hiểu về nhau. Quãng thời gian chưa chính thức ấy, là điều rất mới mẻ đối với mi trong tình yêu, đó giờ mi chưa</p>
+        <p>từng nghĩ rằng trước khi chính thức bước vào mối quan hệ thì sẽ có thời gian để tìm hiểu về nhau, về thói quen,</p>
+        <p>về lý tưởng, về sở thích,... như vậy. Đối với mi, đây có lẽ là mối quan hệ tình cảm sâu sắc, trưởng thành nhất mà</p>
+        <p>mi từng trải qua. Cảm ơn bạn gái đã xuất hiện trong cuộc đời của mi, đã khiến những quan niệm về tình yêu của</p>
+        <p>mi thay đổi rất nhiều. Bên cạnh mi đã thật sự có một người bạn gái tận tâm, đáng yêu, xinh đẹp, giỏi giang, suy</p>
+        <p>nghĩ chu đáo về mọi mặt. Mi luôn cảm thấy mình là một người rất may mắn và hạnh phúc vì đã được làm bạn trai của u.</p>
+        <p>Bên cạnh đó, lúc nào mi cũng có những thiếu xót, mi làm bạn gái phiền lòng, tủi thân. Mi sẽ cố gắng thay đổi, vì u,</p>
+        <p>vì mi, vì chúng ta. Mi mong sẽ được dành nhiều thời gian để có thể ở bên u, viết những dòng thư như vậy thật nhiều</p>
+        <p>nhiều nữa.</p>
+        <p>Dù đi đâu, làm gì, mi vẫn sẽ luôn yêu Bảo Dung, yêu em Hươu cao tí của mi rất nhiều!!! ❤️❤️❤️</p>
+        <p  style="padding-left: 350px;">Bạn trai của u, Công Minh</p>
+    </div>
+
+    <div style="text-align: center; padding-bottom: 10px;">
+        <a href="page2.html" style="text-decoration: none;">
+            <button style="padding: 10px 20px; font-size: 16px; background-color: #A72450; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                NEXT
+            </button>
+        </a>
+    </div>
+
+    <script>
+        function createHearts(container) {
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 200 + 'px';
+                heart.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        createHearts(document.getElementById('leftDeco'));
+        createHearts(document.getElementById('rightDeco'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="icon" href="../images/pinie.jpg" />
+    <title>To my love ❤️</title>
+</head>
+<body>
+    <canvas id="fireworksCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const images = [
+            '../images/IMG_1207.JPG', 
+            '../images/IMG_1470.JPG', 
+            '../images/IMG_1874.JPG', 
+            '../images/IMG_1905.PNG', 
+            '../images/IMG_1906.PNG', 
+            '../images/IMG_1920.JPG', 
+            '../images/IMG_2267.PNG', 
+            '../images/IMG_2318.JPG', 
+            '../images/IMG_2319.JPG', 
+            '../images/IMG_2375.JPG', 
+            '../images/IMG_2376.JPG', 
+            '../images/IMG_2399.PNG', 
+            '../images/IMG_2400.PNG', 
+            '../images/IMG_2410.JPG', 
+            '../images/IMG_2462.JPG', 
+            '../images/IMG_2537.PNG', 
+            '../images/IMG_2690.JPG', 
+            '../images/IMG_2966.JPG', 
+            '../images/IMG_2969.PNG', 
+            '../images/IMG_3011.JPG', 
+            '../images/IMG_3046.JPG', 
+            '../images/IMG_3116.PNG', 
+            '../images/IMG_3122.JPG', 
+            '../images/IMG_3136.JPG', 
+            '../images/IMG_3217.JPG', 
+            '../images/IMG_3320.JPG', 
+            '../images/IMG_3321.JPG', 
+            '../images/IMG_3338.JPG', 
+            '../images/IMG_5265.PNG',  
+            
+        ];
+
+        // Tạo sao
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                alpha: Math.random()
+            });
+        }
+
+        function drawStars() {
+            ctx.save();
+            for (let star of stars) {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.fill();
+            }
+            ctx.restore();
+        }
+
+        class Rocket {
+            constructor(x) {
+                this.x = x;
+                this.y = canvas.height;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                this.speed = 5 + Math.random() * 5;
+                this.angle = Math.PI / 2 + (Math.random() - 0.5) * 0.4;
+                this.trail = [];
+            }
+
+            update() {
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y -= Math.sin(this.angle) * this.speed;
+                this.trail.push({x: this.x, y: this.y, alpha: 1});
+                if (this.trail.length > 20) this.trail.shift();
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                for (let i = this.trail.length - 1; i >= 0; i--) {
+                    const point = this.trail[i];
+                    ctx.lineTo(point.x, point.y);
+                    point.alpha -= 0.05;
+                }
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 6 - 3;
+                this.speedY = Math.random() * 6 - 3;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.1) this.size -= 0.1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        let fireworksEnded = false;
+
+        function createFirework(x, y) {
+            const particleCount = 100;
+            const particles = [];
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(x, y));
+            }
+
+            function animate() {
+                ctx.fillStyle = 'rgba(0, 0, 40, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                drawStars();
+
+                particles.forEach((particle, index) => {
+                    if (particle.size <= 0.1) {
+                        particles.splice(index, 1);
+                    } else {
+                        particle.update();
+                        particle.draw();
+                    }
+                });
+
+                if (particles.length > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    showImage(x, y);
+                }
+            }
+
+            animate();
+        }
+
+        function showImage(x, y) {
+            const img = new Image();
+            img.src = images[Math.floor(Math.random() * images.length)];
+            img.onload = () => {
+                ctx.save();
+                ctx.fillStyle = 'white';
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.roundRect(x - 100, y - 100, 200, 200, 10);
+                ctx.stroke();
+                ctx.clip();
+                ctx.drawImage(img, x - 100, y - 100, 200, 200);
+                ctx.restore();
+
+                let opacity = 1;
+                const fadeOutInterval = setInterval(() => {
+                    opacity -= 0.01;
+                    ctx.save();
+                    ctx.globalAlpha = opacity; 
+                    ctx.fillStyle = 'white';
+                    ctx.strokeStyle = 'white';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.roundRect(x - 100, y - 100, 200, 200, 10);
+                    ctx.stroke();
+                    ctx.clip();
+                    ctx.drawImage(img, x - 100, y - 100, 200, 200);
+                    ctx.restore();
+
+                    if (opacity <= 0) {
+                        clearInterval(fadeOutInterval);
+
+                        if (fireworksEnded) {
+                            showNextButton();
+                        }
+                    }
+                }, 30);
+
+                setTimeout(() => {
+                    ctx.fillStyle = 'rgba(0, 0, 40, 0.1)';
+                    ctx.fillRect(x - 100, y - 100, 200, 200);
+                }, 3000);
+            };
+        }
+
+        function launchFireworks() {
+            const rocketCount = 1 + Math.floor(Math.random());
+            const rockets = [];
+            const zoneWidth = canvas.width / rocketCount;
+
+            for (let i = 0; i < rocketCount; i++) {
+                const x = (i * zoneWidth) + (Math.random() * zoneWidth); 
+                rockets.push(new Rocket(x));
+            }
+
+            let allExploded = false;
+
+            function animateRockets() {
+                ctx.fillStyle = 'rgba(0, 0, 40, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                drawStars();
+
+                rockets.forEach((rocket, index) => {
+                    rocket.update();
+                    rocket.draw();
+
+                    if (rocket.y < canvas.height * 0.3) {
+                        rockets.splice(index, 1);
+                        createFirework(rocket.x, rocket.y);
+                    }
+                });
+
+                if (rockets.length > 0) {
+                    requestAnimationFrame(animateRockets);
+                }   else if (!allExploded) {
+                    allExploded = true;
+                    setTimeout(() => {
+                        showRandomImage();
+                    }, 1000);
+                }   else { 
+                    // **Kiểm tra xem tất cả pháo hoa đã nổ chưa**
+                    if (!fireworksEnded) {
+                        fireworksEnded = true;
+                        showNextButton();
+                    }
+                }
+            }
+
+            animateRockets();
+        }
+
+        function showRandomImage() {
+            const x = Math.random() * (canvas.width - 200) + 100;
+            const y = Math.random() * (canvas.height - 200) + 100;
+            showImage(x, y);
+        }
+
+        setInterval(launchFireworks, 5000);
+        launchFireworks(); 
+
+        ctx.fillStyle = 'rgb(0, 0, 40)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        drawStars();
+
+        function showNextButton() {
+            const nextButton = document.createElement('a');
+
+            const button = document.createElement('button');
+            button.style.padding = "10px 20px";
+            button.style.fontSize = "16px";
+            button.style.backgroundColor = "#ff3366";
+            button.style.color = "white";
+            button.style.border = "none";
+            button.style.borderRadius = "5px";
+            button.style.cursor = "pointer";
+            button.textContent = "NEXT";
+
+            nextButton.appendChild(button);
+            document.body.appendChild(nextButton);
+        }
+    </script>
+</body>
+</html>
